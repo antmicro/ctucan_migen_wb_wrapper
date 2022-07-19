@@ -1,0 +1,37 @@
+From 2c822c80e52f9618fb1df57b57071263f2c9dd5e Mon Sep 17 00:00:00 2001
+From: Robert Winkler <rwinkler@antmicro.com>
+Date: Thu, 14 Jul 2022 12:37:13 +0200
+Subject: [PATCH] Specify signal widths to fix GHDL conversion
+
+Signed-off-by: Robert Winkler <rwinkler@antmicro.com>
+---
+ src/lib/id_transfer.vhd | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/lib/id_transfer.vhd b/src/lib/id_transfer.vhd
+index 1ebd1d21..e8e07f88 100644
+--- a/src/lib/id_transfer.vhd
++++ b/src/lib/id_transfer.vhd
+@@ -59,7 +59,7 @@ package id_transfer is
+     -- Register value to decimal value
+     procedure ID_reg_to_decimal(
+         signal ID_reg   : in    std_logic_vector(28 downto 0);
+-        signal ID_dec   : out   natural
++        signal ID_dec   : out   natural range 0 to (2 ** 29 - 1)
+     );
+ 
+     -- Decimal value to register value
+@@ -74,8 +74,8 @@ package body id_transfer is
+ 
+ 
+     procedure ID_reg_to_decimal(
+-        signal ID_reg   : in  std_logic_vector(28 downto 0);
+-        signal ID_dec   : out natural
++        signal ID_reg   : in    std_logic_vector(28 downto 0);
++        signal ID_dec   : out   natural range 0 to (2 ** 29 - 1)
+     ) is
+         variable base : std_logic_vector(10 downto 0);
+         variable ext  : std_logic_vector(17 downto 0);
+-- 
+2.25.1
+
