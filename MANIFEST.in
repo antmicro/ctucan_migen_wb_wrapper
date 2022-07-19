@@ -1,0 +1,2 @@
+graft ctucan/vhdl/
+global-exclude *.py[cod]
