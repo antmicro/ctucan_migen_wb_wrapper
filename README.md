@@ -1,10 +1,10 @@
 # CTUCAN Migen Wishbone wrapper
 
-This repository contains a python package that wraps the
-[CTUCAN FD IP-core](https://gitlab.fel.cvut.cz/canbus/ctucanfd_ip_core) into a
-[Migen](https://github.com/m-labs/migen) module with a Wishbone interface, that
-can be used with [LiteX SoC Builder](https://github.com/enjoy-digital/litex)
-for creating custom SoC designs.
+This repository contains a Python package that wraps the
+[CTUCAN FD IP-core](https://github.com/antmicro/ctucanfd_ip_core) in its
+last-known MIT-licensed version into a [Migen](https://github.com/m-labs/migen)
+module with a Wishbone interface which can be used for creating custom SoC
+designs, e.g. ones intended for the open source SkyWater 130nm PDK MPW shuttle.
 
 Additionally, this project can be used to generate the Verilog code of
 the Wishbone wrapper and use it separately without any other dependencies.
@@ -17,38 +17,38 @@ includes the most important files and directories.
 ```
 .
 ├── ctucan
-│   ├── __init__.py
-│   ├── utils
-│   └── vhdl
-│       └── ...
+│   ├── __init__.py
+│   ├── utils
+│   └── vhdl
+│       └── ...
 ├── patches
 ├── requirements.txt
 ├── scripts
-│   ├── generate_verilog_wrapper.py
-│   └── generate_vhdl_sources.py
+│   ├── generate_verilog_wrapper.py
+│   └── generate_vhdl_sources.py
 ├── setup.py
 ├── tests
-│   ├── test_ctucan.py
-│   ├── test_integration.py
-│   ├── top_test.v
-│   └── ...
+│   ├── test_ctucan.py
+│   ├── test_integration.py
+│   ├── top_test.v
+│   └── ...
 └── third-party
     └── ctucanfd_ip_core
 ```
 
-* `ctucan/` - the main directory of the python package. The implementation of
+* `ctucan/` - the main directory of the Python package. The implementation of
   both the main CTUCAN and Wishbone wrapper modules can be found
   in the `__init__.py` file. The `vhdl/` directory inside the package
   contains the CTUCAN sources in the MIT version patched with custom changes
   (from the `patches/` directory). Useful functions not related directly
-  with to the created Migen modules can be found in the `utils/` directory.
+  to the created Migen modules can be found in the `utils/` directory.
 
 * `patches/` - contains custom changes made to the MIT version of the CTUCAN
   IP-core, that allow the core to be converted from VHDL to Verilog
   using GHDL.
 
-* `requirements.txt` - the list of python packages necessary for the package
-  development and running tests.
+* `requirements.txt` - list of Python packages necessary for development and
+  testing.
 
 * `scripts/` - contains scripts that can be useful for package management
   or source code generation. The `generate_vhdl_sources.py` script is used
@@ -56,13 +56,13 @@ includes the most important files and directories.
   and writing back to the chosen directory. It can be used to recreate
   the contents of the `ctucan/vhdl` directory. Besides that, the
   `generate_verilog_wrapper.py` script can be used to produce sources of
-  the wishbone wrapper for the CTUCAN IP-core.
+  the Wishbone wrapper for the CTUCAN IP-core.
 
 * `tests/` - directory with functional and integration tests of the CTUCAN
   python package. The `top_test.v` file contains a top-level module used
   for functional tests, which are placed in the `test_ctucan.py` script.
   The `test_integration.py` file contains tests showing that the Migen modules
-  from the package can correctly be used together with Migen and LiteX.
+  from the package can correctly be used together with Migen.
 
 ## Prerequisites
 
@@ -75,10 +75,10 @@ your machine.
 
 ## Usage
 
-It is possible to use the package with `LiteX` or for generating
-the verilog sources of the Wishbone wrapper.
+It is possible to use the package with e.g. `LiteX` or for generating
+the Verilog sources of the Wishbone wrapper.
 
-### Instantiating the CTUCAN module in LiteX's SoC
+### Instantiating the CTUCAN module in a LiteX SoC
 
 The CTUCAN module from this package can be used in the same way as any
 other Migen module, except that all the registers are implemented in the
@@ -102,6 +102,7 @@ soc.add_interrupt("can")                                     # connect the IRQ l
 soc.add_memory_region("can", None, soc.can.wbwrapper.size, type=[])
 soc.add_wb_slave(soc.bus.regions["can"].origin, soc.can.wbwrapper.bus)
 ```
+
 When building the LiteX design you should see the following information
 in the generated log:
 
@@ -123,7 +124,7 @@ IRQ Locations: (3)
 - can    : 2
 ```
 
-### Generating Wishbone wrapper
+### Generating the Wishbone wrapper
 
 To generate the Wishbone wrapper, you can use the dedicated script from the
 `scripts` directory:
@@ -131,5 +132,6 @@ To generate the Wishbone wrapper, you can use the dedicated script from the
 ```bash
 ./generate_verilog_sources.py > ctucan_wrapper.v
 ```
+
 Note that to use the wrapper, you will have to append the sources
 of the CTUCAN IP-core itself.
