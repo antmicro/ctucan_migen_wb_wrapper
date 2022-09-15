@@ -1,5 +1,7 @@
 # CTUCAN Migen Wishbone wrapper
 
+Copyright (c) 2022 Antmicro
+
 This repository contains a Python package that wraps the
 [CTUCAN FD IP-core](https://github.com/antmicro/ctucanfd_ip_core) in its
 last-known MIT-licensed version into a [Migen](https://github.com/m-labs/migen)
