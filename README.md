@@ -130,7 +130,7 @@ To generate the Wishbone wrapper, you can use the dedicated script from the
 `scripts` directory:
 
 ```bash
-./generate_verilog_sources.py > ctucan_wrapper.v
+./generate_verilog_wrapper.py > ctucan_wrapper.v
 ```
 
 Note that to use the wrapper, you will have to append the sources
