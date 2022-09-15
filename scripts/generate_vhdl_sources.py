@@ -8,7 +8,7 @@ import subprocess
 
 parser = argparse.ArgumentParser(description='Generate CTUCAN sources')
 parser.add_argument('src', help='CTUCAN source directory')
-parser.add_argument('dest', help="output direstory")
+parser.add_argument('dest', help="output directory")
 parser.add_argument('-p', action="append", help="Patch to apply", default=[])
 parser.add_argument(
     '-f',
