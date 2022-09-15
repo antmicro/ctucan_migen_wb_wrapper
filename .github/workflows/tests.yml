@@ -69,6 +69,7 @@ jobs:
 
       - name: Run tests
         run: |
+          make generate-vhdl
           make test
 
       - name: Upload artifacts
