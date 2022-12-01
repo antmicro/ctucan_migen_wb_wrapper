@@ -18,6 +18,8 @@ jobs:
       - name: Setup repository
         if: ${{ !env.ACT }}
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
 
       - name: Set up Python
         uses: actions/setup-python@v2
