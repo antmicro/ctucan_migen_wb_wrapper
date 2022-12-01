@@ -22,7 +22,7 @@ clean: ## clean build artifacts
 	find . -name '*~' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
-dist: clean ## package the sources
+dist: clean generate-vhdl ## package the sources
 	python3 setup.py sdist
 	python3 setup.py bdist_wheel
 
