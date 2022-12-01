@@ -26,6 +26,7 @@ def convert_to_verilog(
 
     with tempfile.NamedTemporaryFile("w") as ys_file:
         ys_file.write(ys)
+        ys_file.flush()
         subprocess.check_call(f"cat {ys_file.name}", shell=True)
         ys_cmd = "yosys -m ghdl -s {}".format(ys_file.name)
         subprocess.check_call(ys_cmd, shell=True)
